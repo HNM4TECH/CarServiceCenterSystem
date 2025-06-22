@@ -77,8 +77,20 @@ public class Vehicle
     public ICollection<Booking> Bookings { get; set; }
 }
 
+## 3. كلاس العميل والسيارة (CustomerVehicle)
+public class CustomerVehicle
+{
+    public int CustomerId { get; set; }
+    public int VehicleId { get; set; }
 
-## 3. كلاس أوامر الصيانة (MaintenanceOrder)
+    public Customer Customer { get; set; }
+    public Vehicle Vehicle { get; set; }
+
+}
+
+
+
+## 4. كلاس أوامر الصيانة (MaintenanceOrder)
 
 public class MaintenanceOrder
 {
@@ -108,7 +120,7 @@ public class MaintenanceOrder
 }
 
 
-## 4. كلاس الفني (Mechanic)
+## 5. كلاس الفني (Mechanic)
 
 public class Mechanic
 {
@@ -120,7 +132,7 @@ public class Mechanic
     public ICollection<MaintenanceOrder> MaintenanceOrders { get; set; }
 }
 
-## 5. كلاس قطع الغيار (SparePart)
+## 6. كلاس قطع الغيار (SparePart)
 
 public class SparePart
 {
@@ -135,7 +147,7 @@ public class SparePart
     public ICollection<SparePartUsage> SparePartUsages { get; set; }
 }
 
-6. كلاس استخدام قطع الغيار (SparePartUsage)
+7. كلاس استخدام قطع الغيار (SparePartUsage)
 
 public class SparePartUsage
 {
@@ -148,7 +160,7 @@ public class SparePartUsage
     public SparePart SparePart { get; set; }
 }
 
-7. كلاس الفاتورة (Invoice)
+8. كلاس الفاتورة (Invoice)
 
 public class Invoice
 {
@@ -167,7 +179,7 @@ public class Invoice
     public ICollection<Payment> Payments { get; set; }
 }
 
-8. كلاس الدفعات (Payment)
+9. كلاس الدفعات (Payment)
 
 public class Payment
 {
@@ -182,7 +194,7 @@ public class Payment
 }
 
 
-9. كلاس الحجوزات (Booking)
+10. كلاس الحجوزات (Booking)
 
 public class Booking
 {
@@ -196,7 +208,7 @@ public class Booking
     public Vehicle Vehicle { get; set; }
 }
 
-10. كلاس تقييم رضا العملاء (Feedback)
+11. كلاس تقييم رضا العملاء (Feedback)
 
 public class Feedback
 {
