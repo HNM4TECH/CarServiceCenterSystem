@@ -77,15 +77,7 @@ public class Vehicle
 }
 
 ## 3. كلاس العميل والسيارة (CustomerVehicle)
-public class CustomerVehicle
-{
-    public int CustomerId { get; set; }
-    public int VehicleId { get; set; }
 
-    public Customer Customer { get; set; }
-    public Vehicle Vehicle { get; set; }
-
-}
 
 
 
