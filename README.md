@@ -62,7 +62,6 @@ public class Customer
 public class Vehicle
 {
     public int VehicleId { get; set; }      // رقم متسلسل للسيارة  (Primary Key)
-    public int CustomerId { get; set; }     // (Foreign Key) 
     public string Type { get; set; }        // نوع السيارة (مثل: تويوتا)
     public string Model { get; set; }       // موديل السيارة
     public string PlateNumber { get; set; } // رقم اللوحة
