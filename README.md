@@ -46,14 +46,14 @@ CarServiceCenterSystem
 ```csharp
 public class Customer
 {
-    public int CustomerId { get; set; }  // رقم العميل (Primary Key)
-    public string Name { get; set; }     // اسم العميل
-    public string Phone { get; set; }    // رقم الهاتف
-    public string Address { get; set; }  // العنوان
+    public int CustomerId { get; set; }  // رقم العميل (PK)
+    public string Name { get; set; }     // الاسم
+    public string Phone { get; set; }    // الهاتف
 
-    // قائمة السيارات المرتبطة بهذا العميل (علاقة 1 إلى متعدد)
-    public ICollection<Vehicle> Vehicles { get; set; }
+   
+    public ICollection<MaintenanceOrder> MaintenanceOrders { get; set; }
 }
+
 
 ---
 
@@ -61,20 +61,18 @@ public class Customer
 
 public class Vehicle
 {
-    public int VehicleId { get; set; }      // رقم متسلسل للسيارة  (Primary Key)
-    public string Type { get; set; }        // نوع السيارة (مثل: تويوتا)
+    public int VehicleId { get; set; }      // رقم متسلسل للسيارة (PK)
+    public string Type { get; set; }        // نوع السيارة
     public string Model { get; set; }       // موديل السيارة
     public string PlateNumber { get; set; } // رقم اللوحة
 
-    // علاقة التنقل إلى العميل
-    public Customer Customer { get; set; }
-
-    // أوامر الصيانة الخاصة بهذه السيارة
+   
     public ICollection<MaintenanceOrder> MaintenanceOrders { get; set; }
 
-    // الحجوزات الخاصة بالسيارة
+   
     public ICollection<Booking> Bookings { get; set; }
 }
+
 
 
 
@@ -83,28 +81,25 @@ public class Vehicle
 
 public class MaintenanceOrder
 {
-    public int MaintenanceOrderId { get; set; } //  رقم أمر الصيانة(Primary Key)
-    public int VehicleId { get; set; }          // (Foreign Key)
-    public int MechanicId { get; set; }         // (Foreign Key)
+    public int MaintenanceOrderId { get; set; }   // رقم أمر الصيانة
 
-    public string ProblemDescription { get; set; }  // وصف المشكلة
-    public decimal EstimatedCost { get; set; }      // التكلفة التقديرية
-    public string Status { get; set; }               // حالة الطلب (جاري، منجز، مؤجل)
-
-    // توقيع العميل على أمر الصيانة (مثلاً صورة مخزنة كـ byte array)
-    public byte[] CustomerSignature { get; set; } // تم الغاءها سيتم الحفظ في ملف خارجي
-
-    // علاقات التنقل
+    public int VehicleId { get; set; }            // السيارة التي تم صيانتها
     public Vehicle Vehicle { get; set; }
+
+    public int CustomerId { get; set; }           // العميل الذي جاء بالسيارة
+    public Customer Customer { get; set; }
+
+    public int MechanicId { get; set; }           // الفني
     public Mechanic Mechanic { get; set; }
-    
-    // قطع الغيار المستخدمة في هذه الصيانة
+
+    public string CustomerProblemDescription { get; set; } // وصف العميل
+    public string MechanicDiagnosis { get; set; }          // ملاحظات الفني بعد الفحص
+
+    public decimal EstimatedCost { get; set; }   // التكلفة التقديرية
+    public string Status { get; set; }   // حالة الطلب (جاري، منجز، مؤجل)
+
     public ICollection<SparePartUsage> SparePartUsages { get; set; }
-
-    // الفاتورة المرتبطة بهذا الأمر
     public Invoice Invoice { get; set; }
-
-    // تقييم رضا العميل
     public Feedback Feedback { get; set; }
 }
 
@@ -160,10 +155,10 @@ public class Invoice
     public decimal LaborCost { get; set; }          // تكلفة العمالة
     public decimal TotalAmount { get; set; }        // المبلغ الكلي
 
-    // توقيع العميل على الفاتورة
+   
     public byte[] CustomerSignature { get; set; } // تم الغاءها سيتم الحفظ في ملف خارجي
 
-    // علاقة التنقل
+   
     public MaintenanceOrder MaintenanceOrder { get; set; }
     public ICollection<Payment> Payments { get; set; }
 }
